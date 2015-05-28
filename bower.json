@@ -1,0 +1,13 @@
+{
+  "name": "bedrock-credential-curator",
+  "version": "0.0.0",
+  "main": ["./components/credential-curator.js"],
+  "moduleType": ["amd"],
+  "ignore": [
+    "bedrock",
+    "bedrock.json"
+  ],
+  "dependencies": {
+    "bedrock-angular": "^1.0.0"
+  }
+}
