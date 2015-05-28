@@ -1,0 +1,34 @@
+{
+  "name": "bedrock-credential-curator",
+  "version": "0.0.0",
+  "description": "Bedrock Credential Curator",
+  "main": "./lib/curator",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-credential-curator"
+  },
+  "keywords": [
+    "bedrock"
+  ],
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "http://digitalbazaar.com"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/bedrock-credential-curator/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/bedrock-credential-curator",
+  "dependencies": {
+    "async": "~0.9.0"
+  },
+  "peerDependencies": {
+    "bedrock": "^1.0.0"
+  },
+  "directories": {
+    "lib": "./lib"
+  }
+}
