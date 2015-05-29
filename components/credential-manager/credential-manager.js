@@ -14,6 +14,14 @@ define([
 
 var module = angular.module('bedrock-credential-curator.manager', []);
 
+// TODO: need widgets for:
+// viewing claimed credentials
+// managing ACL for pre-authorized access to credentials
+// screen with pluggable credential displayer? would be nice to
+//   make it replaceable so a better displayer can be used
+// viewing notifications of unclaimed credentials or done as part of another
+// module?
+
 module.directive(credentialManager);
 
 return module.name;

@@ -23,10 +23,12 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-credential-curator",
   "dependencies": {
-    "async": "~0.9.0"
+    "async": "~0.9.0",
+    "jsonld-signatures": "~0.2.4"
   },
   "peerDependencies": {
-    "bedrock": "^1.0.0"
+    "bedrock": "^1.0.0",
+    "bedrock-permission": "^1.0.0"
   },
   "directories": {
     "lib": "./lib"
