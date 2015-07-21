@@ -14,10 +14,9 @@ function brCredentialManager() {
   return {
     restrict: 'E',
     scope: {},
-    /* jshint multistr: true */
-    template: '\
-      <div> \
-      </div>'
+    templateUrl: requirejs.toUrl(
+      'bedrock-credential-curator/components/credential-manager/' +
+      'credential-manager.html')
   };
 }
 

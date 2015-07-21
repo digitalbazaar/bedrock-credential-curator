@@ -8,11 +8,16 @@
 define([
   'angular',
   './credential-manager-directive'
-], function(angular, credentialManager) {
+], function(
+  angular,
+  credentialManager
+) {
 
 'use strict';
 
-var module = angular.module('bedrock-credential-curator.manager', []);
+var module = angular.module('bedrock-credential-curator.manager', [
+  'bedrock-credentials-rest.credential'
+]);
 
 // TODO: need widgets for:
 // viewing claimed credentials

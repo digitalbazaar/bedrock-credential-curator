@@ -28,6 +28,7 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
+    "bedrock-credentials-rest": "^0.0.1",
     "bedrock-permission": "^1.0.0"
   },
   "directories": {

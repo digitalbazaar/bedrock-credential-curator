@@ -5,7 +5,10 @@
   "moduleType": ["amd"],
   "ignore": [
     "bedrock",
-    "bedrock.json"
+    "bedrock.json",
+    "lib",
+    "node_modules",
+    "package.json"
   ],
   "dependencies": {
     "bedrock-angular": "^1.0.0"
