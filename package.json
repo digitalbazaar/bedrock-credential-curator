@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
-    "bedrock-credentials-rest": "^0.0.1",
+    "bedrock-credentials-rest": "digitalbazaar/bedrock-credentials-rest#master",
     "bedrock-permission": "^1.0.0"
   },
   "directories": {
