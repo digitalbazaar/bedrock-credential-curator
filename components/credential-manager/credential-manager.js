@@ -16,7 +16,7 @@ define([
 'use strict';
 
 var module = angular.module('bedrock-credential-curator.manager', [
-  'bedrock-credentials-rest.credential'
+  'bedrock.credential'
 ]);
 
 // TODO: need widgets for:
