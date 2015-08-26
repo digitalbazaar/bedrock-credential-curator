@@ -7,7 +7,8 @@
  */
 define([
   'angular',
-  './credential-manager/credential-manager'
+  './credential-manager/credential-manager',
+  './tasks/tasks'
 ], function(angular) {
 
 'use strict';
