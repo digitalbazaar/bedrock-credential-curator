@@ -6,7 +6,7 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-define([], function() {
+define(['jsonld'], function(jsonld) {
 
 'use strict';
 
@@ -16,7 +16,8 @@ function factory(config) {
   self.request = config.data.request;
   self.query = config.data.curator.query;
   self.identity = config.data.curator.identity;
-  self.credentials = self.identity.credential.map(function(credential) {
+  self.credentials = jsonld.getValues(
+    self.identity, 'credential').map(function(credential) {
     return credential['@graph'];
   });
 
