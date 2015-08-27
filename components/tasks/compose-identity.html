@@ -8,11 +8,11 @@
   <div ng-controller="ComposeIdentityController as model">
     <div class="row">
       <div class="col-md-12">
-        Select this credential to fulfill the request?<br/>
-        <pre class="pre-scrollable">{{model.identity | json}}</pre>
-
-        <button ng-click="model.transmit(model.identity)" type="button"
-          class="btn btn-primary">Compose Credential</button>
+        <br-identity-composer
+          ng-model="model.identity"
+          br-credentials="model.credentials"
+          br-consumer-query="model.query"
+          br-library="model.library"></br-identity-composer>
       </div>
     </div>
   </div>
