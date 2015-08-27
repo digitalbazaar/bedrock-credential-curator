@@ -15,9 +15,9 @@ function factory(config) {
   var self = this;
   self.request = config.data.request;
   self.query = config.data.curator.query;
-  self.identity = config.data.curator.identity;
+  self.identity = null;
   self.credentials = jsonld.getValues(
-    self.identity, 'credential').map(function(credential) {
+    config.data.curator.identity, 'credential').map(function(credential) {
     return credential['@graph'];
   });
 
