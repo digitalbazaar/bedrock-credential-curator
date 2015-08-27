@@ -14,10 +14,11 @@ define([], function() {
 function factory(config) {
   var self = this;
   self.request = config.data.request;
-  self.credentials = config.data.curator.credentials;
   self.query = config.data.curator.query;
-  self.identity = {};
-  self.library = {};
+  self.identity = config.data.curator.identity;
+  self.credentials = self.identity.credential.map(function(credential) {
+    return credential['@graph'];
+  });
 
   // transmit the selected credential to the requestor
   self.transmit = function(identity) {
