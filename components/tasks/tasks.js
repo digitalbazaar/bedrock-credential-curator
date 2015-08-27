@@ -8,10 +8,12 @@
 define([
   'angular',
   './compose-identity-controller',
+  './store-credentials-controller',
   './routes'
 ], function(
   angular,
   composeIdentityController,
+  storeCredentialsController,
   routes
 ) {
 
@@ -29,6 +31,7 @@ module.config(function($routeProvider) {
 });
 
 module.controller(composeIdentityController);
+module.controller(storeCredentialsController);
 
 return module.name;
 

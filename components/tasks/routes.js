@@ -18,6 +18,14 @@ return [{
     templateUrl: requirejs.toUrl(
       'bedrock-credential-curator/components/tasks/compose-identity.html')
   }
+}, {
+  path: '/tasks/credentials/request-credential-storage',
+  options: {
+    title: 'Store Credentials',
+    session: 'required',
+    templateUrl: requirejs.toUrl(
+      'bedrock-credential-curator/components/tasks/store-credentials.html')
+  }
 }];
 
 });
