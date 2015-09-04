@@ -24,7 +24,14 @@ return [{
     title: 'Store Credentials',
     session: 'required',
     templateUrl: requirejs.toUrl(
-      'bedrock-credential-curator/components/tasks/store-credentials.html')
+      'bedrock-credential-curator/components/tasks/store-credentials.html'),
+    resolve:{
+      check: function($location, config) {
+        if(config.data.curator === undefined) {
+          $location.path('/');
+        }
+      }
+    }
   }
 }];
 
