@@ -41,7 +41,13 @@ function factory($http, $scope, brAlertService, config) {
         });
       }).catch(function(err) {
         console.error('Failed to store credential', err);
-        brAlertService.add('error', 'Failed to store the credential.');
+        switch(err.type) {
+          case 'DuplicateCredential':
+            brAlertService.add('error', 'Duplicate credential.');
+            break;
+          default:
+            brAlertService.add('error', 'Failed to store the credential.');
+        }
       }).then(function() {
         $scope.$apply();
       });
