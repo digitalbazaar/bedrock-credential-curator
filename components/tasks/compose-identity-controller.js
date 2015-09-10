@@ -15,11 +15,7 @@ function factory(config) {
   var self = this;
   self.request = config.data.request;
   self.query = config.data.curator.query;
-  self.identity = null;
-  self.credentials = jsonld.getValues(
-    config.data.curator.identity, 'credential').map(function(credential) {
-    return credential['@graph'];
-  });
+  self.identity = config.data.curator.identity;
 
   // transmit the selected credential to the requestor
   self.transmit = function(identity) {

@@ -9,9 +9,10 @@
     <div class="row">
       <div class="col-md-12">
         <br-identity-composer
-          ng-model="model.identity"
-          br-credentials="model.credentials"
-          br-consumer-query="model.query"></br-identity-composer>
+          br-consumer-query="model.query"
+          br-identity="model.identity"
+          br-callback="model.transmit(identity)">
+        </br-identity-composer>
       </div>
     </div>
   </div>
