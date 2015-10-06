@@ -51,7 +51,10 @@ function factory($http, $scope, brAlertService, config) {
   self.complete = function(identity) {
     var promise;
     if(operation.name === 'get') {
-      promise = _signIdentity(identity);
+      // TODO: remove identity signing, unnecessary? public key credential
+      // signed by IdP, not entire identity doc (identity doc should be
+      // signed by Credential Agent)
+      promise = Promise.resolve(identity);//_signIdentity(identity);
     } else {
       promise = _storeCredentials(identity);
     }
@@ -87,6 +90,7 @@ function factory($http, $scope, brAlertService, config) {
     });
   }
 
+/*
   function _signIdentity(identity) {
     return Promise.resolve(
       $http.post('/tasks/credentials/sign-identity', identity))
@@ -97,7 +101,7 @@ function factory($http, $scope, brAlertService, config) {
         }
         return response.data;
       });
-  }
+  }*/
 
   // stores credentials
   function _storeCredentials(identity) {

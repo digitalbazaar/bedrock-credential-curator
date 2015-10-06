@@ -25,7 +25,8 @@
   "dependencies": {
     "async": "^1.4.2",
     "body-parser": "^1.13.3",
-    "jsonld-signatures": "^1.0.2"
+    "jsonld-signatures": "^1.0.2",
+    "node-uuid": "^1.4.3"
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
