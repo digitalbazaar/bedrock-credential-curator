@@ -51,10 +51,11 @@ function factory($http, $scope, brAlertService, config) {
   self.complete = function(identity) {
     var promise;
     if(operation.name === 'get') {
-      // TODO: remove identity signing, unnecessary? public key credential
-      // signed by IdP, not entire identity doc (identity doc should be
-      // signed by Credential Agent)
-      promise = Promise.resolve(identity);//_signIdentity(identity);
+      // TODO: if present, public key credential must be both verified
+      // as self-signed and then signed by IdP... the query may also include
+      // a request for the IdP to permanently store the public key and
+      // include its new identifier in the public key credential
+      promise = Promise.resolve(identity);
     } else {
       promise = _storeCredentials(identity);
     }
@@ -89,19 +90,6 @@ function factory($http, $scope, brAlertService, config) {
       return response.data;
     });
   }
-
-/*
-  function _signIdentity(identity) {
-    return Promise.resolve(
-      $http.post('/tasks/credentials/sign-identity', identity))
-      .then(function(response) {
-        // TODO: implement more comprehensive error handling
-        if(response.status !== 200) {
-          throw response;
-        }
-        return response.data;
-      });
-  }*/
 
   // stores credentials
   function _storeCredentials(identity) {
