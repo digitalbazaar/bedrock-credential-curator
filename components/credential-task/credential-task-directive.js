@@ -13,7 +13,9 @@ define(['angular', 'jsonld'], function(angular, jsonld) {
 /* @ngInject */
 function brCredentialTaskDirective() {
   /* @ngInject */
-  function Ctrl($http, $scope, brAlertService, config) {
+  function Ctrl(
+    $http, $scope, brAlertService, brAuthenticationService, brSessionService,
+    config) {
     var self = this;
     self.identity = null;
     self.loading = true;
@@ -27,13 +29,32 @@ function brCredentialTaskDirective() {
       agentUrl: aio.baseUri + '/agent'
     }).then(function(op) {
       operation = op;
-      if(op.name === 'get') {
+      return brSessionService.get();
+    }).then(function(session) {
+      // session does not exist
+      if(!session.identity) {
+        return self.createSession({identity: operation.options.identity});
+      }
+
+      // force logout; session authenticated for wrong identity
+      if(session.identity.id !== operation.options.identity.id) {
+        // FIXME: logout listeners should handle this cleanup
+        if(config.data.idp && 'identity' in config.data.idp.session) {
+          delete config.data.idp.session.identity;
+        }
+        return brAuthenticationService.logout().then(function() {
+          return self.createSession({identity: operation.options.identity});
+        });
+      }
+    }).then(function() {
+      // handle operation, proper session created
+      if(operation.name === 'get') {
         self.view = 'get';
-        self.query = op.options.query;
-        return _getIdentity(op.options);
+        self.query = operation.options.query;
+        return _getIdentity(operation.options);
       } else {
         self.view = 'store';
-        return Promise.resolve(op.identity);
+        return Promise.resolve(operation.options.store);
       }
     }).then(function(identity) {
       self.identity = identity;
