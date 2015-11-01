@@ -22,8 +22,7 @@ function factory($http, $scope, brAlertService, config) {
   var operation;
 
   navigator.credentials.getPendingOperation({
-    // TODO: get full url from config
-    agentUrl: aio.baseUri + '/agent?route=params'
+    agentUrl: aio.baseUri + '/agent'
   }).then(function(op) {
     operation = op;
     if(op.name === 'get') {
@@ -32,7 +31,7 @@ function factory($http, $scope, brAlertService, config) {
       return _getIdentity(op.options);
     } else {
       self.view = 'store';
-      return Promise.resolve(op.credential);
+      return Promise.resolve(op.credential.identity);
     }
   }).then(function(identity) {
     self.identity = identity;
@@ -60,9 +59,8 @@ function factory($http, $scope, brAlertService, config) {
       promise = _storeCredentials(identity);
     }
     promise.then(function() {
-      // TODO: get auth.io full URL from config
       return operation.complete(identity, {
-        agentUrl: aio.baseUri +'/agent?op=' + operation.name + '&route=result'
+        agentUrl: aio.baseUri +'/agent'
       });
     }).catch(function(err) {
       console.error('Failed to ' + operation.name + ' credential', err);
