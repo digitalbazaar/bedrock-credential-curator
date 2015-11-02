@@ -31,7 +31,7 @@ function factory($http, $scope, brAlertService, config) {
       return _getIdentity(op.options);
     } else {
       self.view = 'store';
-      return Promise.resolve(op.credential.identity);
+      return Promise.resolve(op.credential);
     }
   }).then(function(identity) {
     self.identity = identity;
