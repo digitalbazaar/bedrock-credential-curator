@@ -31,7 +31,7 @@ function factory($http, $scope, brAlertService, config) {
       return _getIdentity(op.options);
     } else {
       self.view = 'store';
-      return Promise.resolve(op.credential);
+      return Promise.resolve(op.identity);
     }
   }).then(function(identity) {
     self.identity = identity;
@@ -77,10 +77,9 @@ function factory($http, $scope, brAlertService, config) {
 
   // gets credentials for the identity composer
   function _getIdentity(options) {
-    // TODO: POSTing `credential` only necessary when its present
     return Promise.resolve($http.post('/tasks/credentials/compose-identity', {
       query: options.query,
-      credential: options.credential,
+      identity: options.identity,
       // FIXME: remove (only here for backwards compatibility)
       publicKey: options.publicKey
     })).then(function(response) {
