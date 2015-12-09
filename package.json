@@ -24,7 +24,6 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-credential-curator",
   "dependencies": {
     "async": "^1.4.2",
-    "body-parser": "^1.13.3",
     "jsonld-signatures": "^1.1.3",
     "node-uuid": "^1.4.3"
   },
