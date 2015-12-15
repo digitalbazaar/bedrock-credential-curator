@@ -51,7 +51,7 @@ function brCredentialTaskDirective() {
           return self.createSession({identity: operation.options.identity});
         });
       }
-    }).then(function(identity) {
+    }).then(function() {
       // handle operation, proper session created
       if(operation.name === 'get') {
         self.query = operation.options.query;
