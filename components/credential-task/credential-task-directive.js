@@ -6,7 +6,7 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-define(['angular', 'jsonld'], function(angular, jsonld) {
+define(['underscore', 'angular', 'jsonld'], function(_, angular, jsonld) {
 
 'use strict';
 
@@ -21,6 +21,11 @@ function brCredentialTaskDirective() {
     self.loading = true;
     var aio = {
       baseUri: config.data['authorization-io'].baseUri
+    };
+    var CRYPTO_KEY_REQUEST = {
+      '@context': 'https://w3id.org/identity/v1',
+      id: '',
+      publicKey: ''
     };
 
     var operation;
@@ -46,17 +51,27 @@ function brCredentialTaskDirective() {
           return self.createSession({identity: operation.options.identity});
         });
       }
-    }).then(function() {
+    }).then(function(identity) {
       // handle operation, proper session created
       if(operation.name === 'get') {
-        self.view = 'get';
         self.query = operation.options.query;
+        // do not show `get` view for crypto key requests because they are
+        // auto-handled
+        if(!_isCryptoKeyRequest(self.query)) {
+          self.view = 'get';
+        }
         return _getIdentity(operation.options);
       } else {
         self.view = 'store';
         return Promise.resolve(operation.options.store);
       }
     }).then(function(identity) {
+      // if op is `get` and query is a public key query, complete using the
+      // identity w/the public key credential (which should, by now, be signed
+      // by the IdP)
+      if(operation.name === 'get' && _isCryptoKeyRequest(self.query)) {
+        return self.complete(identity);
+      }
       self.identity = identity;
       self.credentials = jsonld.getValues(
         self.identity, 'credential').map(function(credential) {
@@ -125,6 +140,16 @@ function brCredentialTaskDirective() {
             throw response;
           }
         });
+    }
+
+    function _isCryptoKeyRequest(query) {
+      // query may have `id` set -- this doesn't affect whether or not it is
+      // a crypto key request
+      query = _.extend({}, query);
+      if('id' in query) {
+        query.id = '';
+      }
+      return _.isEqual(query, CRYPTO_KEY_REQUEST);
     }
   }
 
