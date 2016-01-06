@@ -111,12 +111,17 @@ function brCredentialTaskDirective() {
 
     // gets credentials for the identity composer
     function _getIdentity(options) {
-      return Promise.resolve($http.post('/tasks/credentials/compose-identity', {
+      var url = '/tasks/credentials/compose-identity';
+      var data = {
         query: options.query,
         identity: options.identity,
         // FIXME: remove (only here for backwards compatibility)
         publicKey: options.publicKey
-      })).then(function(response) {
+      };
+      if(options.registerKey) {
+        data.registerKey = true;
+      }
+      return Promise.resolve($http.post(url, data)).then(function(response) {
         // TODO: implement more comprehensive error handling
         if(response.status !== 200) {
           throw response;
