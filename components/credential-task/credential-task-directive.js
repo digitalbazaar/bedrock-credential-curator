@@ -94,7 +94,7 @@ function brCredentialTaskDirective() {
       }
       promise.then(function() {
         return operation.complete(identity, {
-          agentUrl: aio.baseUri +'/agent'
+          agentUrl: aio.baseUri + '/agent'
         });
       }).catch(function(err) {
         console.error('Failed to ' + operation.name + ' credential', err);
