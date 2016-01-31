@@ -34,8 +34,8 @@
     "bedrock-express": "^1.4.0",
     "bedrock-credentials-mongodb": "^1.0.0",
     "bedrock-credentials-rest": "digitalbazaar/bedrock-credentials-rest#master",
-    "bedrock-passport": "digitalbazaar/bedrock-passport#2.x",
-    "bedrock-permission": "^1.0.0",
+    "bedrock-passport": "^2.0.0",
+    "bedrock-permission": "^1.1.0",
     "bedrock-views": "^1.5.0"
   },
   "directories": {
