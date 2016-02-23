@@ -50,6 +50,8 @@ identities[userName] = {};
 identities[userName].identity = createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({
   sysRole: 'bedrock.credential.issuer'
+}, {
+  sysRole: 'identity.registered'
 });
 identities[userName].credentials = [];
 identities[userName].credentials.push(
@@ -127,6 +129,9 @@ identities[userName].keys = createKeyPair({
 userName = 'logTest';
 identities[userName] = {};
 identities[userName].identity = createIdentity(userName);
+identities[userName].identity.sysResourceRole.push({
+  sysRole: 'identity.registered'
+});
 identities[userName].credentials = [];
 identities[userName].credentials.push(
   createCredential(identities[userName].identity.id));
@@ -202,6 +207,9 @@ identities[userName].keys = createKeyPair({
 userName = 'tenCredentials';
 identities[userName] = {};
 identities[userName].identity = createIdentity(userName);
+identities[userName].identity.sysResourceRole.push({
+  sysRole: 'identity.registered'
+});
 identities[userName].credentials = [];
 for(var i = 0; i < 10; i++) {
   identities[userName].credentials.push(

@@ -1,6 +1,8 @@
 /*
- * Copyright (c) 2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
+ /* globals describe, before, after, it, should, beforeEach, afterEach */
+ /* jshint node: true */
 'use strict';
 
 var async = require('async');
@@ -416,7 +418,7 @@ describe('bedrock-credential-curator credential updates', function() {
           var options = {
             credentialId: credentialId,
             eventType: 'CredentialClaim',
-            identity: mockData.identities.tenCredentials
+            identity: mockData.identities.tenCredentials.identity
           };
           checkEvent(options, callback);
         }
@@ -449,7 +451,7 @@ describe('bedrock-credential-curator credential updates', function() {
           var options = {
             credentialId: credentialId,
             eventType: 'CredentialReject',
-            identity: mockData.identities.tenCredentials
+            identity: mockData.identities.tenCredentials.identity
           };
           checkEvent(options, callback);
         }
@@ -515,7 +517,7 @@ function validateCredential(options, callback) {
 function checkEvent(options, callback) {
   database.collections.eventLog.find({
     'event.actor': options.identity.id,
-    'event.resource': {$all: [options.credentialId]}
+    'event.resource': options.credentialId
   }).toArray(function(err, records) {
     should.not.exist(err);
     should.exist(records);
