@@ -1,12 +1,15 @@
 /*
- * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
 'use strict';
 
 var async = require('async');
 var bedrock = require('bedrock');
 var brIdentity = require('bedrock-identity');
 var config = bedrock.config;
+var constants = config.constants;
 var database = require('bedrock-mongodb');
 var eventLog = require('bedrock-event-log').log;
 var helpers = require('./helpers');
@@ -16,6 +19,32 @@ request = request.defaults({json: true});
 var store = require('bedrock-credentials-mongodb').provider;
 var util = bedrock.util;
 var uuid = require('node-uuid');
+var jsonld = bedrock.jsonld;
+var nodeDocumentLoader = jsonld.documentLoaders.node();
+jsonld.documentLoader = function(url, callback) {
+  var regex = new RegExp(
+    config['credential-curator']['authorization-io'].baseUrl + '(.*?)$');
+  var didMatch = url.match(regex);
+  if(didMatch && didMatch.length === 2 &&
+    didMatch[1] in mockData.didDocuments) {
+    return callback(
+      null, {
+        contextUrl: null,
+        document: mockData.didDocuments[didMatch[1]],
+        documentUrl: url
+      });
+  }
+  if(url in constants.CONTEXTS) {
+    return callback(
+      null, {
+        contextUrl: null,
+        document: constants.CONTEXTS[url],
+        documentUrl: url
+      });
+  }
+  nodeDocumentLoader(url, callback);
+};
+
 var testEndpoint =
   config.server.baseUri +
   config['credential-curator'].endpoints.composeIdentity;
