@@ -1,7 +1,7 @@
 /*!
  * Credential Curator components module.
  *
- * Copyright (c) 2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */

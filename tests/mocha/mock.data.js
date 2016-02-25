@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ */
 /* globals require, module, exports */
 /* jshint -W097 */
 'use strict';

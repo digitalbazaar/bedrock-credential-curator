@@ -33,6 +33,7 @@
   "peerDependencies": {
     "bedrock": "^1.0.0",
     "bedrock-express": "^1.4.0",
+    "bedrock-event-log": "^1.0.0",
     "bedrock-credentials-mongodb": "^1.0.0",
     "bedrock-credentials-rest": "^0.1.0",
     "bedrock-passport": "^2.0.0",
@@ -41,9 +42,5 @@
   },
   "directories": {
     "lib": "./lib"
-  },
-  "devDependencies": {
-    "bedrock-event-log": "digitalbazaar/bedrock-event-log#master",
-    "request": "^2.67.0"
   }
 }
