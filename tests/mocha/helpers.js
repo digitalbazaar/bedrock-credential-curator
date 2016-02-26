@@ -92,9 +92,9 @@ api.validateEvent = function(eventType, record, identity) {
       event.type.should.be.a('string');
       event.type.should.equal('CredentialQuery');
       should.exist(event.date);
-      should.exist(event.claimId);
-      event.claimId.should.be.a('string');
-      event.claimId.should.equal(identity.identity.id);
+      should.exist(event.subject);
+      event.subject.should.be.a('string');
+      event.subject.should.equal(identity.identity.id);
       should.exist(event.resource);
       event.resource.should.be.an('array');
       event.resource.should.have.length(1);
@@ -119,9 +119,9 @@ api.validateEvent = function(eventType, record, identity) {
       event.type.should.be.a('string');
       event.type.should.equal('CredentialStore');
       should.exist(event.date);
-      should.exist(event.claimId);
-      event.claimId.should.be.a('string');
-      event.claimId.should.equal(identity.identity.id);
+      should.exist(event.subject);
+      event.subject.should.be.a('string');
+      event.subject.should.equal(identity.identity.id);
       should.exist(event.resource);
       event.resource.should.be.an('array');
       event.resource.should.have.length(1);
