@@ -13,7 +13,9 @@ define([], function() {
 function brCredentialManager() {
   return {
     restrict: 'E',
-    scope: {},
+    scope: {
+      identity: '=brIdentity'
+    },
     templateUrl: requirejs.toUrl(
       'bedrock-credential-curator/components/credential-manager/' +
       'credential-manager.html')
