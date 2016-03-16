@@ -19,6 +19,7 @@ function brCredentialTaskDirective() {
     var self = this;
     self.identity = null;
     self.loading = true;
+    self.baseUri = config.data.baseUri;
     var aio = {
       baseUri: config.data['authorization-io'].baseUri
     };
