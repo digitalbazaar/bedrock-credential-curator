@@ -6,7 +6,7 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-define(['underscore', 'angular', 'jsonld'], function(_, angular, jsonld) {
+define(['lodash', 'angular', 'jsonld'], function(_, angular, jsonld) {
 
 'use strict';
 
@@ -14,12 +14,14 @@ define(['underscore', 'angular', 'jsonld'], function(_, angular, jsonld) {
 function brCredentialTaskDirective() {
   /* @ngInject */
   function Ctrl(
-    $http, $scope, brAlertService, brAuthenticationService, brSessionService,
-    config) {
+    $http, $scope, brAlertService, brAuthenticationService, brCredentialService,
+    brSessionService, config) {
     var self = this;
     self.identity = null;
     self.loading = true;
-    self.baseUri = config.data.baseUri;
+    self.publicAccess = {
+      requested: false
+    };
     var aio = {
       baseUri: config.data['authorization-io'].baseUri
     };
@@ -56,6 +58,12 @@ function brCredentialTaskDirective() {
       // handle operation, proper session created
       if(operation.name === 'get') {
         self.query = operation.options.query;
+        // TODO: Consider changing "cred:requestPublicAccess" to
+        // "cred:requestPersistentAccess" with a value of "publicAccess" so we
+        // can support consumers providing their ID as a value as well
+        if(jsonld.hasProperty(self.query, 'cred:requestPublicAccess')) {
+          self.publicAccess.requested = true;
+        }
         // do not show `get` view for crypto key requests because they are
         // auto-handled
         if(!_isCryptoKeyRequest(self.query)) {
@@ -89,7 +97,11 @@ function brCredentialTaskDirective() {
     self.complete = function(identity) {
       var promise;
       if(operation.name === 'get') {
-        promise = Promise.resolve(identity);
+        if(self.publicAccess.requested) {
+          promise = Promise.all(_makePublic(identity));
+        } else {
+          promise = Promise.resolve(identity);
+        }
       } else {
         promise = _storeCredentials(identity);
       }
@@ -109,6 +121,10 @@ function brCredentialTaskDirective() {
         $scope.$apply();
       });
     };
+
+    function _compareHost(url) {
+      return url.indexOf(config.data.baseUri) === 0;
+    }
 
     // gets credentials for the identity composer
     function _getIdentity(options) {
@@ -156,6 +172,28 @@ function brCredentialTaskDirective() {
         query.id = '';
       }
       return _.isEqual(query, CRYPTO_KEY_REQUEST);
+    }
+
+    function _makePublic(identity) {
+      var updatePromises = [];
+      identity.credential.forEach(function(c) {
+        var credential = c['@graph'];
+        var update = {
+          '@context': credential['@context'],
+          id: credential.id,
+          sysPublic: ['*']
+        };
+        var options = {};
+        // FIXME: comparing the host and then modifying the URL on that basis
+        // is a hack that requires special knowledge
+        if(!_compareHost(credential.id)) {
+          options.url = brCredentialService.credentialsBasePath +
+            '?id=' + credential.id;
+        }
+        updatePromises.push(
+          brCredentialService.collection.update(update, options));
+      });
+      return updatePromises;
     }
   }
 
