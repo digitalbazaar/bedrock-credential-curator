@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
+ /* globals describe, before, after, it, should, beforeEach, afterEach */
+ /* jshint node: true */
 'use strict';
 
 var async = require('async');
@@ -39,7 +41,7 @@ describe('bedrock-credential-curator credential storage', function() {
     it('should respond with 400 - PermissionDenied', function(done) {
       request.post({
         url: testEndpoint,
-        body: {'some': 'credential'},
+        body: {'some': 'credential'}
       }, function(err, res, body) {
         should.not.exist(err);
         res.statusCode.should.equal(400);
@@ -67,14 +69,6 @@ describe('bedrock-credential-curator credential storage', function() {
         body.should.be.an('object');
         body.type.should.be.a('string');
         body.type.should.equal('PermissionDenied');
-        should.exist(body.cause);
-        body.cause.should.be.an('object');
-        should.exist(body.cause.type);
-        body.cause.type.should.be.a('string');
-        body.cause.type.should.equal('NotFound');
-        should.exist(body.cause.message);
-        body.cause.message.should.be.a('string');
-        body.cause.message.should.equal('PublicKey not found.');
         done();
       });
     });
@@ -160,7 +154,8 @@ describe('bedrock-credential-curator credential storage', function() {
     });
 
     // FIXME: Enable test when unique index is enabled in credentials-mongodb
-    it.skip('should return 409 on duplicate issuer + referenceId', function(done) {
+    it.skip(
+      'should return 409 on duplicate issuer + referenceId', function(done) {
       var credentialGamma = createUniqueCredential(uuid.v4());
       // reuse referenceIdAlpha
       credentialGamma.credential[0]['@graph'].referenceId = referenceIdAlpha;

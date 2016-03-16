@@ -512,7 +512,8 @@ function createKeyPair(options) {
   var privateKey = options.privateKey;
   var ownerId = null;
   if(userName === 'userUnknown') {
-    ownerId = '';
+    // using a random DID for this user
+    ownerId = 'did:' + uuid.v4();
   } else {
     ownerId = identities[userName].identity.id;
   }

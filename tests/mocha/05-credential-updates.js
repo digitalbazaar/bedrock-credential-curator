@@ -43,15 +43,14 @@ describe('bedrock-credential-curator credential updates', function() {
     }, done);
   });
   after('Remove test data', function(done) {
-    // helpers.removeCollections(done);
-    done();
+    helpers.removeCollections(done);
   });
 
   describe('unauthenticated requests', function() {
     it('should respond with 400 - PermissionDenied', function(done) {
       request.post({
         url: testEndpoint,
-        body: {'some': 'credential'},
+        body: {'some': 'credential'}
       }, function(err, res, body) {
         should.not.exist(err);
         res.statusCode.should.equal(400);
@@ -80,14 +79,6 @@ describe('bedrock-credential-curator credential updates', function() {
         body.should.be.an('object');
         body.type.should.be.a('string');
         body.type.should.equal('PermissionDenied');
-        should.exist(body.cause);
-        body.cause.should.be.an('object');
-        should.exist(body.cause.type);
-        body.cause.type.should.be.a('string');
-        body.cause.type.should.equal('NotFound');
-        should.exist(body.cause.message);
-        body.cause.message.should.be.a('string');
-        body.cause.message.should.equal('PublicKey not found.');
         done();
       });
     });

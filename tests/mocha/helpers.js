@@ -166,9 +166,15 @@ api.insertTestData = function(options, callback) {
   async.forEachOf(mockData.identities, function(identity, key, callback) {
     async.parallel([
       function(callback) {
+        if(options.identities && !options.identities.insert) {
+          return callback();
+        }
         brIdentity.insert(null, identity.identity, callback);
       },
       function(callback) {
+        if(options.identities && !options.identities.insert) {
+          return callback();
+        }
         brKey.addPublicKey(null, identity.keys.publicKey, callback);
       },
       function(callback) {
