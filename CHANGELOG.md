@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.2.3] - 2016-03-27
+
+### Changed
+- Use credentials-polyfill 0.8.x.
+
 ## [0.2.2] - 2016-03-27
 
 ### Changed
@@ -27,7 +32,8 @@
 ### Added
 - Use `bedrock-credentials-rest` to display credentials.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.2...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.3...HEAD
+[0.2.3]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.1.1...0.2.0
