@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.2.4] - 2016-03-28
+
+### Changed
+- Add option to claim credential on storage.
+
 ## [0.2.3] - 2016-03-27
 
 ### Changed
@@ -32,7 +37,8 @@
 ### Added
 - Use `bedrock-credentials-rest` to display credentials.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.3...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.4...HEAD
+[0.2.4]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.0...0.2.1
