@@ -1,6 +1,6 @@
 {
   "name": "bedrock-credential-curator",
-  "version": "0.2.5",
+  "version": "0.2.6-dev",
   "main": [
     "./components/credential-curator.js"
   ],
