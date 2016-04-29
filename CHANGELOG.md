@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2016-04-29
+
 ## [0.3.0] - 2016-04-15
 
 ### Changed
@@ -47,7 +49,8 @@
 ### Added
 - Use `bedrock-credentials-rest` to display credentials.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.5...0.3.0
 [0.2.5]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.3...0.2.4
