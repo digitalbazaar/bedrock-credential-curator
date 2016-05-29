@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2016-05-29
+
+### Changed
+- **BREAKING**: Enable permission checking on composing identities and
+  storing credentials.
+- **BREAKING**: Disable support for old credential-polyfill protocol
+  (identity w/public key credential must be sent, not just public key
+  when composing an identity).
+
 ## [0.3.1] - 2016-04-29
 
 ## [0.3.0] - 2016-04-15
@@ -48,15 +57,3 @@
 
 ### Added
 - Use `bedrock-credentials-rest` to display credentials.
-
-[Unreleased]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.3.1...HEAD
-[0.3.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.3.0...0.3.1
-[0.3.0]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.5...0.3.0
-[0.2.5]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.4...0.2.5
-[0.2.4]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.3...0.2.4
-[0.2.3]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.2...0.2.3
-[0.2.2]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.1...0.2.2
-[0.2.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.2.0...0.2.1
-[0.2.0]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.1.1...0.2.0
-[0.1.1]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.1.0...0.1.1
-[0.1.0]: https://github.com/digitalbazaar/bedrock-credential-curator/compare/0.0.0...0.1.0
