@@ -35,7 +35,7 @@
     "bedrock-express": "^2.0.0",
     "bedrock-event-log": "^2.0.0",
     "bedrock-credentials-mongodb": "^3.0.0",
-    "bedrock-credentials-rest": "^0.3.0",
+    "bedrock-credentials-rest": "^1.0.0",
     "bedrock-passport": "^3.0.0",
     "bedrock-permission": "^2.3.0",
     "bedrock-views": "^4.0.0"
