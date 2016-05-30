@@ -1,8 +1,11 @@
 # bedrock-credential-curator ChangeLog
 
-## [Unreleased]
+## 0.4.1 - 2016-05-30
 
-## [0.4.0] - 2016-05-29
+### Changed
+- Update dependencies.
+
+## 0.4.0 - 2016-05-29
 
 ### Changed
 - **BREAKING**: Enable permission checking on composing identities and
@@ -11,49 +14,49 @@
   (identity w/public key credential must be sent, not just public key
   when composing an identity).
 
-## [0.3.1] - 2016-04-29
+## 0.3.1 - 2016-04-29
 
-## [0.3.0] - 2016-04-15
+## 0.3.0 - 2016-04-15
 
 ### Changed
 - Update bedrock and bedrock-angular dependencies.
 
-## [0.2.5] - 2016-03-28
+## 0.2.5 - 2016-03-28
 
 ### Changed
 - Remove unnecessary "Store Credentials" heading.
 
-## [0.2.4] - 2016-03-28
+## 0.2.4 - 2016-03-28
 
 ### Changed
 - Add option to claim credential on storage.
 
-## [0.2.3] - 2016-03-27
+## 0.2.3 - 2016-03-27
 
 ### Changed
 - Use credentials-polyfill 0.8.x.
 
-## [0.2.2] - 2016-03-27
+## 0.2.2 - 2016-03-27
 
 ### Changed
 - Remove unnecessary "Select Credentials" heading.
 
-## [0.2.1] - 2016-03-25
+## 0.2.1 - 2016-03-25
 
 ### Changed
 - Add identity to credential-manager directive.
 
-## [0.2.0] - 2016-03-03
+## 0.2.0 - 2016-03-03
 
 ### Changed
 - Update package dependencies for npm v3 compatibility.
 
-## [0.1.1] - 2016-01-31
+## 0.1.1 - 2016-01-31
 
 ### Fixed
 - Add missing `request` dependency.
 
-## [0.1.0] - 2016-01-31
+## 0.1.0 - 2016-01-31
 
 ### Added
 - Use `bedrock-credentials-rest` to display credentials.
