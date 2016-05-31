@@ -1,5 +1,10 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.3 - 2016-05-31
+
+### Fixed
+- Fix actor in call to insert API.
+
 ## 0.4.2 - 2016-05-30
 
 ### Fixed
