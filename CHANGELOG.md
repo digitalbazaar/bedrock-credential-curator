@@ -1,5 +1,10 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.4 - 2016-06-08
+
+### Changed
+- Do not display spinner during login process.
+
 ## 0.4.3 - 2016-05-31
 
 ### Fixed
