@@ -41,6 +41,8 @@ function brCredentialTaskDirective() {
     }).then(function(session) {
       // session does not exist
       if(!session.identity) {
+        // do not display spinner during login process
+        self.loading = false;
         return self.createSession({identity: operation.options.identity});
       }
 
