@@ -1,5 +1,10 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.6 - 2016-07-13
+
+### Fixed
+- Remove `version` from bower.json.
+
 ## 0.4.5 - 2016-07-13
 
 ### Changed
