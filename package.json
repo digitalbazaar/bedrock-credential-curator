@@ -1,6 +1,6 @@
 {
   "name": "bedrock-credential-curator",
-  "version": "0.4.6-0",
+  "version": "0.4.6",
   "description": "Bedrock Credential Curator",
   "main": "./lib/curator",
   "scripts": {
