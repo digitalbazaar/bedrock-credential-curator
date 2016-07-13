@@ -1,5 +1,7 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.5 - 2016-07-13
+
 ### Changed
 - Do not include `@context` in submitted public key; already
   given at top-level of DID object.
