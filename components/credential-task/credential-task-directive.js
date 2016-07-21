@@ -112,10 +112,13 @@ function brCredentialTaskDirective() {
           agentUrl: aio.baseUri + '/agent'
         });
       }).catch(function(err) {
-        console.error('Failed to ' + operation.name + ' credential', err);
         if(operation.name === 'store' && err.type === 'DuplicateCredential') {
-          brAlertService.add('error', 'Duplicate credential.');
+          // the credential has already been stored successfully, return success
+          return operation.complete(identity, {
+            agentUrl: aio.baseUri + '/agent'
+          });
         } else {
+          console.error('Failed to ' + operation.name + ' credential', err);
           brAlertService.add(
             'error', 'Failed to ' + operation.name + ' the credential.');
         }
