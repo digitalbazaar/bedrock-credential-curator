@@ -1,9 +1,14 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.8 - 2016-07-21
+
+### Changed
+- Update credentials-polyfill to 0.10.x.
+
 ## 0.4.7 - 2016-07-21
 
 ### Changed
--  Return success on duplicate storage request.
+- Return success on duplicate storage request.
 
 ## 0.4.6 - 2016-07-13
 
