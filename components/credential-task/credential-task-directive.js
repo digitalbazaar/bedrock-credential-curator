@@ -14,7 +14,7 @@ define(['lodash', 'angular', 'jsonld'], function(_, angular, jsonld) {
 function brCredentialTaskDirective() {
   /* @ngInject */
   function Ctrl(
-    $http, $scope, brAlertService, brAuthenticationService, brCredentialService,
+    $http, $scope, brAlertService, brCredentialService,
     brSessionService, config) {
     var self = this;
     self.identity = null;
@@ -52,7 +52,7 @@ function brCredentialTaskDirective() {
         if(config.data.idp && 'identity' in config.data.idp.session) {
           delete config.data.idp.session.identity;
         }
-        return brAuthenticationService.logout().then(function() {
+        return brSessionService.logout().then(function() {
           return self.createSession({identity: operation.options.identity});
         });
       }
