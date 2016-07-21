@@ -17,7 +17,7 @@
     "bedrock-angular": "^2.0.0",
     "bedrock-angular-credential": "^2.0.0",
     "bedrock-angular-identity-composer": "^1.0.0",
-    "credentials-polyfill": "^0.8.0",
+    "credentials-polyfill": "^0.10.0",
     "lodash": "^4.6.1"
   }
 }
