@@ -18,7 +18,7 @@ var request = require('request');
 request = request.defaults({json: true});
 var store = require('bedrock-credentials-mongodb').provider;
 var util = bedrock.util;
-var uuid = require('node-uuid');
+var uuid = require('uuid').v4;
 var jsonld = bedrock.jsonld;
 var nodeDocumentLoader = jsonld.documentLoaders.node();
 jsonld.documentLoader = function(url, callback) {
@@ -212,7 +212,7 @@ describe('bedrock-credential-curator compose identity', function() {
         var alteredCryptographicIdentity =
           util.clone(cryptographicIdentity.rsa4096);
         alteredCryptographicIdentity.credential['@graph'].claim.id = 'did:' +
-          uuid.v4();
+          uuid();
         request.post(
           {
             url: testEndpoint,

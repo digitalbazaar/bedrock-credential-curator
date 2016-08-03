@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
 'use strict';
 
 var async = require('async');
@@ -14,7 +16,8 @@ var jsonld = bedrock.jsonld;
 var jsigs = require('jsonld-signatures');
 jsigs.use('jsonld', jsonld);
 var store = require('bedrock-credentials-mongodb').provider;
-var uuid = require('node-uuid');
+var uuid = require('uuid').v4;
+var util = bedrock.util;
 var URL = require('url');
 
 // module API
@@ -31,7 +34,7 @@ api.createCrytographicIdentity = function(sourceIdentity, callback) {
   };
   var credential = {
     '@context': 'https://w3id.org/identity/v1',
-    id: 'urn:ephemeral:' + uuid.v4(),
+    id: 'urn:ephemeral:' + uuid(),
     type: ['Credential', 'CryptographicKeyCredential'],
     claim: {
       id: sourceIdentity.identity.id,
@@ -78,7 +81,22 @@ api.createIdentity = function(identity) {
   return newIdentity;
 };
 
+api.createUniqueCredential = function(claimId) {
+  var testBaseUri = 'https://example.com/credentials/';
+  var newCredential = util.clone(mockData.credentialTemplate);
+  newCredential.id = testBaseUri + uuid();
+  newCredential.claim.id = claimId;
+  var newIdentity = {
+    '@context': 'https://w3id.org/identity/v1',
+    type: 'Identity',
+    id: claimId,
+    credential: [{'@graph': newCredential}]
+  };
+  return newIdentity;
+};
+
 api.validateEvent = function(eventType, record, identity) {
+  var event;
   switch(eventType) {
     case 'CredentialQuery':
       should.exist(record.typeSpecific);
@@ -87,7 +105,7 @@ api.validateEvent = function(eventType, record, identity) {
         .equal(database.hash(identity.identity.id));
       should.exist(record.event);
       record.event.should.be.an('object');
-      var event = record.event;
+      event = record.event;
       should.exist(event.type);
       event.type.should.be.a('string');
       event.type.should.equal('CredentialQuery');
@@ -114,7 +132,7 @@ api.validateEvent = function(eventType, record, identity) {
         .equal(database.hash(identity.identity.id));
       should.exist(record.event);
       record.event.should.be.an('object');
-      var event = record.event;
+      event = record.event;
       should.exist(event.type);
       event.type.should.be.a('string');
       event.type.should.equal('CredentialStore');

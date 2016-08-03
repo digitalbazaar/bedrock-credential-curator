@@ -8,7 +8,7 @@
 var bedrock = require('bedrock');
 var config = bedrock.config;
 var util = bedrock.util;
-var uuid = require('node-uuid');
+var uuid = require('uuid').v4;
 
 var credentialTemplate = {
   '@context': 'https://w3id.org/identity/v1',
@@ -485,14 +485,14 @@ Object.keys(identities).forEach(function(i) {
 function createCredential(id) {
   var newCredential = util.clone(credentialTemplate);
   newCredential.id = config.server.baseUri +
-    config['credentials-rest'].basePath + '/' + uuid.v4();
+    config['credentials-rest'].basePath + '/' + uuid();
   newCredential.claim.id = id;
   return newCredential;
 }
 
 function createIdentity(userName) {
   var newIdentity = {
-    id: 'did:' + uuid.v4(),
+    id: 'did:' + uuid(),
     type: 'Identity',
     sysSlug: userName,
     label: userName,
@@ -513,7 +513,7 @@ function createKeyPair(options) {
   var ownerId = null;
   if(userName === 'userUnknown') {
     // using a random DID for this user
-    ownerId = 'did:' + uuid.v4();
+    ownerId = 'did:' + uuid();
   } else {
     ownerId = identities[userName].identity.id;
   }

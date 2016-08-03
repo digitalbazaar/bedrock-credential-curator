@@ -13,9 +13,11 @@
 // In this case, the didio module will attempt to pull the DID document from
 // authorization.io and use the public key found there.
 
+var _ = require('lodash');
 var async = require('async');
 var bedrock = require('bedrock');
 var brIdentity = require('bedrock-identity');
+var brPermission = require('bedrock-permission');
 var config = bedrock.config;
 var constants = config.constants;
 var database = require('bedrock-mongodb');
@@ -26,7 +28,7 @@ var request = require('request');
 request = request.defaults({json: true});
 var store = require('bedrock-credentials-mongodb').provider;
 var util = bedrock.util;
-var uuid = require('node-uuid');
+var uuid = require('uuid').v4;
 var jsonld = bedrock.jsonld;
 var nodeDocumentLoader = jsonld.documentLoaders.node({strictSSL: false});
 jsonld.documentLoader = function(url, callback) {
@@ -59,8 +61,32 @@ var testEndpoint =
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
+// add identity defaults to non-persistent identities
+// this functionality is commonly provided by bedrock-consumer
+bedrock.events.on('bedrock-passport.authenticate', function(info, callback) {
+  var identityDefaults = {
+    sysResourceRole: [{
+      sysRole: 'identity.registered',
+      // this will set the resource to the `id` of the identity
+      generateResource: 'id'
+    }]
+  };
+  var identity = info.user.identity;
+  info.user.identity = _.assign({}, identityDefaults, identity);
+  // handle `generateResource` feature
+  var roles = bedrock.jsonld.getValues(info.user.identity, 'sysResourceRole');
+  roles.forEach(function(role) {
+    if(role.generateResource === 'id') {
+      role.resource = [identity.id];
+    }
+  });
+  callback();
+});
+
 describe('bedrock-credential-curator signed request', function() {
   before('Prepare the database', function(done) {
+    // NOTE: for this group of tests, there are no peristent identities added
+    // to the database.  These tests are for non-persistent identities.
     helpers.prepareDatabase({
       credentials: {
         insert: true,
@@ -73,7 +99,6 @@ describe('bedrock-credential-curator signed request', function() {
   });
   after('Remove test data', function(done) {
     helpers.removeCollections(done);
-    // done();
   });
 
   describe('authenticated requests', function() {
@@ -146,7 +171,7 @@ describe('bedrock-credential-curator signed request', function() {
       // NOTE: this keyId DID is random and is not mocked
       var altSignature =
         helpers.createHttpSignature(mockData.identities.rsa4096);
-      altSignature.keyId = 'did:' + uuid.v4() + '/keys/1';
+      altSignature.keyId = 'did:' + uuid() + '/keys/1';
       request.post(
         {
           url: testEndpoint,

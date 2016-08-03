@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
- /* globals describe, before, after, it, should, beforeEach, afterEach */
- /* jshint node: true */
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
 'use strict';
 
 var async = require('async');
@@ -15,7 +15,7 @@ var helpers = require('./helpers');
 var store = require('bedrock-credentials-mongodb');
 var request = require('request');
 var mockData = require('./mock.data');
-var uuid = require('node-uuid');
+var uuid = require('uuid').v4;
 request = request.defaults({json: true});
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -59,7 +59,7 @@ describe('bedrock-credential-curator credential storage', function() {
       function(done) {
       request.post({
         url: testEndpoint,
-        body: createUniqueCredential(uuid.v4()),
+        body: helpers.createUniqueCredential(uuid()),
         httpSignature:
           helpers.createHttpSignature(mockData.badIdentities.userUnknown)
       }, function(err, res, body) {
@@ -74,7 +74,7 @@ describe('bedrock-credential-curator credential storage', function() {
     });
 
     it('should respond with 200 on a valid storage request', function(done) {
-      var uniqueCredential = createUniqueCredential(uuid.v4());
+      var uniqueCredential = helpers.createUniqueCredential(uuid());
       request.post({
         url: testEndpoint,
         body: uniqueCredential,
@@ -91,12 +91,10 @@ describe('bedrock-credential-curator credential storage', function() {
       });
     });
 
-    // FIXME: enable this test after
-    // bedrock-credential-curator#enableStorePermission has been merged
-    it.skip('should respond PermissionDenied on invalid permissions',
+    it('should respond PermissionDenied on invalid permissions',
       function(done) {
       var uniqueCredential =
-        createUniqueCredential(uuid.v4());
+        helpers.createUniqueCredential(uuid());
       request.post({
         url: testEndpoint,
         body: uniqueCredential,
@@ -124,8 +122,8 @@ describe('bedrock-credential-curator credential storage', function() {
     var referenceIdAlpha;
 
     beforeEach(function(done) {
-      referenceIdAlpha = uuid.v4();
-      var credentialAlpha = createUniqueCredential(uuid.v4());
+      referenceIdAlpha = uuid();
+      var credentialAlpha = helpers.createUniqueCredential(uuid());
       credentialAlpha.credential[0]['@graph'].referenceId = referenceIdAlpha;
       request.post({
         url: testEndpoint,
@@ -139,9 +137,9 @@ describe('bedrock-credential-curator credential storage', function() {
     });
 
     it('should store credentials with unique referenceIds', function(done) {
-      var credentialBeta = createUniqueCredential(uuid.v4());
+      var credentialBeta = helpers.createUniqueCredential(uuid());
       // use a unique referenceId
-      credentialBeta.credential[0]['@graph'].referenceId = uuid.v4();
+      credentialBeta.credential[0]['@graph'].referenceId = uuid();
       request.post({
         url: testEndpoint,
         body: credentialBeta,
@@ -153,10 +151,8 @@ describe('bedrock-credential-curator credential storage', function() {
       });
     });
 
-    // FIXME: Enable test when unique index is enabled in credentials-mongodb
-    it.skip(
-      'should return 409 on duplicate issuer + referenceId', function(done) {
-      var credentialGamma = createUniqueCredential(uuid.v4());
+    it('should return 409 on duplicate issuer + referenceId', function(done) {
+      var credentialGamma = helpers.createUniqueCredential(uuid());
       // reuse referenceIdAlpha
       credentialGamma.credential[0]['@graph'].referenceId = referenceIdAlpha;
       request.post({
@@ -262,20 +258,6 @@ describe('bedrock-credential-curator credential storage', function() {
     });
   });
 });
-
-function createUniqueCredential(claimId) {
-  var testBaseUri = 'https://example.com/credentials/';
-  var newCredential = util.clone(mockData.credentialTemplate);
-  newCredential.id = testBaseUri + uuid.v4();
-  newCredential.claim.id = claimId;
-  var newIdentity = {
-    '@context': 'https://w3id.org/identity/v1',
-    type: 'Identity',
-    id: claimId,
-    credential: [{'@graph': newCredential}]
-  };
-  return newIdentity;
-}
 
 function findCredential(credentialId, callback) {
   var query = {'credential.id': credentialId};
