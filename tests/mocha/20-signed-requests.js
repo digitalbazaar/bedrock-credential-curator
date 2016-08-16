@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals describe, before, after, it, should, beforeEach, afterEach */
 /* jshint node: true */
 'use strict';
 
@@ -16,18 +15,12 @@
 var _ = require('lodash');
 var async = require('async');
 var bedrock = require('bedrock');
-var brIdentity = require('bedrock-identity');
-var brPermission = require('bedrock-permission');
 var config = bedrock.config;
 var constants = config.constants;
-var database = require('bedrock-mongodb');
-var eventLog = require('bedrock-event-log').log;
 var helpers = require('./helpers');
 var mockData = require('./mock.data');
 var request = require('request');
 request = request.defaults({json: true});
-var store = require('bedrock-credentials-mongodb').provider;
-var util = bedrock.util;
 var uuid = require('uuid').v4;
 var jsonld = bedrock.jsonld;
 var nodeDocumentLoader = jsonld.documentLoaders.node({strictSSL: false});
@@ -66,7 +59,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 bedrock.events.on('bedrock-passport.authenticate', function(info, callback) {
   var identityDefaults = {
     sysResourceRole: [{
-      sysRole: 'identity.registered',
+      sysRole: 'bedrock-credential-curator.identity.registered',
       // this will set the resource to the `id` of the identity
       generateResource: 'id'
     }]

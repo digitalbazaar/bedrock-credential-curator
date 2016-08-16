@@ -54,7 +54,7 @@ identities[userName].identity = createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({
   sysRole: 'bedrock.credential.issuer'
 }, {
-  sysRole: 'identity.registered'
+  sysRole: 'bedrock-credential-curator.identity.registered'
 });
 identities[userName].credentials = [];
 identities[userName].credentials.push(
@@ -133,7 +133,7 @@ userName = 'logTest';
 identities[userName] = {};
 identities[userName].identity = createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({
-  sysRole: 'identity.registered'
+  sysRole: 'bedrock-credential-curator.identity.registered'
 });
 identities[userName].credentials = [];
 identities[userName].credentials.push(
@@ -211,7 +211,7 @@ userName = 'tenCredentials';
 identities[userName] = {};
 identities[userName].identity = createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({
-  sysRole: 'identity.registered'
+  sysRole: 'bedrock-credential-curator.identity.registered'
 });
 identities[userName].credentials = [];
 for(var i = 0; i < 10; i++) {
