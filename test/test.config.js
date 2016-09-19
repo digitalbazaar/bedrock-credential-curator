@@ -22,6 +22,9 @@ config.mongodb.adminPrompt = true;
 config.mongodb.dropCollections.onInit = true;
 config.mongodb.dropCollections.collections = [];
 
+// mocha tests
+config.mocha.tests.push(path.join(__dirname, 'mocha'));
+
 /**
  * Load a local copy of credentials v1 context.
  */
@@ -29,17 +32,17 @@ var constants = config.constants;
 constants.CREDENTIALS_CONTEXT_V1_URL = 'https://w3id.org/credentials/v1';
 constants.CONTEXTS[constants.CREDENTIALS_CONTEXT_V1_URL] = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../tests/static-cors/contexts/credentials-v1.jsonld'),
+    path.join(__dirname, 'static-cors/contexts/credentials-v1.jsonld'),
     {encoding: 'utf8'}));
 constants.IDENTITY_CONTEXT_V1_URL = 'https://w3id.org/identity/v1';
 constants.CONTEXTS[constants.IDENTITY_CONTEXT_V1_URL] = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../tests/static-cors/contexts/identity-v1.jsonld'),
+    path.join(__dirname, 'static-cors/contexts/identity-v1.jsonld'),
     {encoding: 'utf8'}));
 constants.SECURITY_CONTEXT_V1_URL = 'https://w3id.org/security/v1';
 constants.CONTEXTS[constants.SECURITY_CONTEXT_V1_URL] = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../tests/static-cors/contexts/security-v1.jsonld'),
+    path.join(__dirname, 'static-cors/contexts/security-v1.jsonld'),
     {encoding: 'utf8'}));
 
 var permissions = config.permission.permissions;

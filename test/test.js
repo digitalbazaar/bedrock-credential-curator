@@ -8,7 +8,7 @@ var path = require('path');
 
 require('bedrock-express');
 require('bedrock-views');
-var curator = require('../lib/curator');
+var curator = require('bedrock-credential-curator');
 curator.store = require('bedrock-credentials-mongodb').provider;
 
 // add pseudo bower package
@@ -18,7 +18,5 @@ config.requirejs.bower.packages.push({
   manifest: path.join(rootPath, 'bower.json')
 });
 
-// mocha tests
-config.mocha.tests.push(path.join(__dirname, '..', 'tests', 'mocha'));
-
+require('bedrock-test');
 bedrock.start();
