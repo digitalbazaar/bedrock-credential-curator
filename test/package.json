@@ -10,6 +10,8 @@
     "url": "https://github.com/digitalbazaar/bedrock-credential-curator"
   },
   "dependencies": {
+    "async": "^1.5.2",
+    "bignumber.js": "^2.1.4",
     "bedrock": "^1.0.0",
     "bedrock-credentials-mongodb": "^3.0.0",
     "bedrock-credentials-rest": "^1.0.0",
@@ -28,7 +30,11 @@
     "bedrock-validation": "^2.2.0",
     "bedrock-views": "^4.0.0",
     "bower": "^1.7.0",
-    "request": "^2.61.0"
+    "did-io": "^0.6.1",
+    "jsonld-signatures": "^1.1.3",
+    "lodash": "^4.14.1",
+    "request": "^2.61.0",
+    "uuid": "^2.0.2"
   },
   "engines": {
     "node": ">=6.0.0"
