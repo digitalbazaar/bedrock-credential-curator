@@ -1,5 +1,10 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.9 - 2016-09-19
+
+### Changed
+- Restructure test framework for CI.
+
 ## 0.4.8 - 2016-07-21
 
 ### Changed
