@@ -41,8 +41,6 @@ function brCredentialTaskDirective() {
     }).then(function(session) {
       // session does not exist
       if(!session.identity) {
-        // do not display spinner during login process
-        self.loading = false;
         return self.createSession({identity: operation.options.identity});
       }
 
@@ -86,8 +84,8 @@ function brCredentialTaskDirective() {
       self.identity = identity;
       self.credentials = jsonld.getValues(
         self.identity, 'credential').map(function(credential) {
-        return credential['@graph'];
-      });
+          return credential['@graph'];
+        });
       self.choices = self.credentials.slice();
     }).catch(function(err) {
       brAlertService.add('error', err);
