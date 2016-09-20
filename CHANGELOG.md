@@ -1,5 +1,11 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.4.10 - 2016-09-20
+
+### Fixed
+- Do not change loading status when there is no session.  This would cause the
+  identity composer to fail when there was not an already established session.
+
 ## 0.4.9 - 2016-09-19
 
 ### Changed
