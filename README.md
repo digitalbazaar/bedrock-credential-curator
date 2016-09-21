@@ -1,5 +1,7 @@
 # bedrock-credential-curator
 
+![build status](http://ci.digitalbazaar.com/buildStatus/icon?job=bedrock-credential-curator)
+
 A [bedrock][] module that provides an interface for claiming, managing, and
 providing credentials to consumers.
 
