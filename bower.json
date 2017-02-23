@@ -1,7 +1,8 @@
 {
   "name": "bedrock-credential-curator",
   "main": [
-    "./components/credential-curator.js"
+    "./components/credential-curator.js",
+    "./components/credential-task/credential-task.less"
   ],
   "moduleType": [
     "amd"
