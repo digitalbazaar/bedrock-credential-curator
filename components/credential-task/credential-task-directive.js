@@ -14,8 +14,8 @@ define(['lodash', 'angular', 'jsonld'], function(_, angular, jsonld) {
 function brCredentialTaskDirective() {
   /* @ngInject */
   function Ctrl(
-    $http, $scope, brAlertService, brCredentialService,
-    brSessionService, config) {
+    $http, $scope, brAlertService, brCredentialService, brSessionService,
+    config) {
     var self = this;
     self.identity = null;
     self.loading = true;
