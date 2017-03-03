@@ -1,5 +1,7 @@
 # bedrock-credential-curator ChangeLog
 
+## 0.5.0 - 2017-03-02
+
 ### Changed
 - Credential store task layout improved for use in iframes and elsewhere.
 
