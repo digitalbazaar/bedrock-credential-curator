@@ -39,7 +39,8 @@ var credentialTemplate = {
     signatureValue: 'lRBljDguLA316oTkXoHPxSFYziXTvSZn1Ap2IEZkDc0F93V5BN' +
       'jHXtC+YS7SbwnYfgBb2d4WnvXDSxzGboAEEw/Jcc2/rz0uqfU1/Jbwps5pLMWnHS/' +
       '5JY+9PPbHNS8PZSeonpEH2hTvK+ofv6CVu7voF3PK3q/Jw3tjmJ88XTA='
-  }
+  },
+  sysStatus: 'active'
 };
 
 // TODO: Correct these paths to be more accurate
