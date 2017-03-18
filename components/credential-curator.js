@@ -13,11 +13,7 @@ define([
 
 'use strict';
 
-var modulePath = requirejs.toUrl('bedrock-credential-curator/components/');
-
 var module = angular.module(
   'bedrock-credential-curator', Array.prototype.slice.call(arguments, 1));
-
-return module.name;
 
 });

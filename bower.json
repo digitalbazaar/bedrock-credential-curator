@@ -17,8 +17,8 @@
   "dependencies": {
     "bedrock-angular": "^2.0.0",
     "bedrock-angular-credential": "^2.2.3",
-    "bedrock-angular-identity-composer": "^1.0.0",
-    "credentials-polyfill": "^0.10.0",
+    "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#2.x",
+    "credentials-polyfill": "^1.0.0",
     "lodash": "^4.6.1"
   }
 }

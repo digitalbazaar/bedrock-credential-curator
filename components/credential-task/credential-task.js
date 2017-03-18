@@ -16,7 +16,7 @@ define([
 
 var module = angular.module(
   'bedrock-credential-curator.credential-task',
-  ['bedrock-identity-composer', 'bedrock.alert']);
+  ['bedrock.identity-composer', 'bedrock.alert']);
 
 module.directive(credentialTaskDirective);
 
