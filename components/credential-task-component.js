@@ -26,7 +26,7 @@ function Ctrl(
   $http, $q, brAlertService, brCredentialService, brSessionService, config) {
   var self = this;
   self.identity = null;
-  self.loading = false;
+  self.loading = true;
   self.publicAccess = {
     requested: false
   };
