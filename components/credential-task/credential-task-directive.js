@@ -1,7 +1,7 @@
 /*!
  * Credential Task Directive.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author Matt Collier
@@ -14,7 +14,7 @@ define(['lodash', 'angular', 'jsonld'], function(_, angular, jsonld) {
 function brCredentialTaskDirective() {
   /* @ngInject */
   function Ctrl(
-    $http, $scope, brAlertService, brCredentialService, brSessionService,
+    $http, $q, brAlertService, brCredentialService, brSessionService,
     config) {
     var self = this;
     self.identity = null;
@@ -33,9 +33,9 @@ function brCredentialTaskDirective() {
 
     var operation;
 
-    navigator.credentials.getPendingOperation({
+    $q.resolve(navigator.credentials.getPendingOperation({
       agentUrl: aio.baseUri + '/agent'
-    }).then(function(op) {
+    })).then(function(op) {
       operation = op;
       return brSessionService.get();
     }).then(function(session) {
@@ -72,7 +72,7 @@ function brCredentialTaskDirective() {
         return _getIdentity(operation.options);
       } else {
         self.view = 'store';
-        return Promise.resolve(operation.options.store);
+        return $q.resolve(operation.options.store);
       }
     }).then(function(identity) {
       // if op is `get` and query is a public key query, complete using the
@@ -91,21 +91,20 @@ function brCredentialTaskDirective() {
       brAlertService.add('error', err);
     }).then(function() {
       self.loading = false;
-      $scope.$apply();
     });
 
     self.complete = function(identity) {
       var promise;
       if(operation.name === 'get') {
         if(self.publicAccess.requested) {
-          promise = Promise.all(_makePublic(identity));
+          promise = $q.all(_makePublic(identity));
         } else {
-          promise = Promise.resolve(identity);
+          promise = $q.resolve(identity);
         }
       } else {
         promise = _storeCredentials(identity);
       }
-      promise.then(function() {
+      return promise.then(function() {
         return operation.complete(identity, {
           agentUrl: aio.baseUri + '/agent'
         });
@@ -120,8 +119,6 @@ function brCredentialTaskDirective() {
           brAlertService.add(
             'error', 'Failed to ' + operation.name + ' the credential.');
         }
-      }).then(function() {
-        $scope.$apply();
       });
     };
 
@@ -141,7 +138,7 @@ function brCredentialTaskDirective() {
       if(options.registerKey) {
         data.registerKey = true;
       }
-      return Promise.resolve($http.post(url, data)).then(function(response) {
+      return $http.post(url, data).then(function(response) {
         // TODO: implement more comprehensive error handling
         if(response.status !== 200) {
           throw response;
@@ -158,8 +155,7 @@ function brCredentialTaskDirective() {
             return {'@graph': credential};
           })
         });
-      return Promise.resolve($http.post(
-        '/tasks/credentials/store-credentials', identity))
+      return $http.post('/tasks/credentials/store-credentials', identity)
         .then(function(response) {
           if(response.status !== 200) {
             throw response;
@@ -194,7 +190,7 @@ function brCredentialTaskDirective() {
             '?id=' + credential.id;
         }
         updatePromises.push(
-          brCredentialService.collection.update(update, options));
+          $q.resolve(brCredentialService.collection.update(update, options)));
       });
       return updatePromises;
     }
