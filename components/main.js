@@ -14,6 +14,6 @@ define([
 'use strict';
 
 var module = angular.module(
-  'bedrock-credential-curator', Array.prototype.slice.call(arguments, 1));
+  'bedrock.credential-curator', Array.prototype.slice.call(arguments, 1));
 
 });
