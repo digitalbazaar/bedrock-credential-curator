@@ -26,13 +26,11 @@ function Ctrl(
   $http, $q, brAlertService, brCredentialService, brSessionService, config) {
   var self = this;
   self.identity = null;
-  self.loading = true;
+  self.loading = false;
   self.publicAccess = {
     requested: false
   };
-  var aio = {
-    baseUri: config.data['authorization-io'].baseUri
-  };
+  var aio = config.data['authorization-io'];
   var CRYPTO_KEY_REQUEST = {
     '@context': 'https://w3id.org/identity/v1',
     id: '',
@@ -41,65 +39,68 @@ function Ctrl(
 
   var operation;
 
-  $q.resolve(navigator.credentials.getPendingOperation({
-    agentUrl: aio.baseUri + '/agent'
-  })).then(function(op) {
-    operation = op;
-    return brSessionService.get();
-  }).then(function(session) {
-    // session does not exist
-    if(!session.identity) {
-      return self.createSession({identity: operation.options.identity});
-    }
-
-    // force logout; session authenticated for wrong identity
-    if(session.identity.id !== operation.options.identity.id) {
-      // FIXME: logout listeners should handle this cleanup
-      if(config.data.idp && 'identity' in config.data.idp.session) {
-        delete config.data.idp.session.identity;
-      }
-      return brSessionService.logout().then(function() {
+  self.$onInit = function() {
+    self.loading = true;
+    $q.resolve(navigator.credentials.getPendingOperation({
+      agentUrl: aio.agentUrl
+    })).then(function(op) {
+      operation = op;
+      return brSessionService.get();
+    }).then(function(session) {
+      // session does not exist
+      if(!session.identity) {
         return self.createSession({identity: operation.options.identity});
-      });
-    }
-  }).then(function() {
-    // handle operation, proper session created
-    if(operation.name === 'get') {
-      self.query = operation.options.query;
-      // TODO: Consider changing "cred:requestPublicAccess" to
-      // "cred:requestPersistentAccess" with a value of "publicAccess" so we
-      // can support consumers providing their ID as a value as well
-      if(jsonld.hasProperty(self.query, 'cred:requestPublicAccess')) {
-        self.publicAccess.requested = true;
       }
-      // do not show `get` view for crypto key requests because they are
-      // auto-handled
-      if(!_isCryptoKeyRequest(self.query)) {
-        self.view = 'get';
+
+      // force logout; session authenticated for wrong identity
+      if(session.identity.id !== operation.options.identity.id) {
+        // FIXME: logout listeners should handle this cleanup
+        if(config.data.idp && 'identity' in config.data.idp.session) {
+          delete config.data.idp.session.identity;
+        }
+        return brSessionService.logout().then(function() {
+          return self.createSession({identity: operation.options.identity});
+        });
       }
-      return _getIdentity(operation.options);
-    } else {
-      self.view = 'store';
-      return $q.resolve(operation.options.store);
-    }
-  }).then(function(identity) {
-    // if op is `get` and query is a public key query, complete using the
-    // identity w/the public key credential (which should, by now, be signed
-    // by the IdP)
-    if(operation.name === 'get' && _isCryptoKeyRequest(self.query)) {
-      return self.complete(identity);
-    }
-    self.identity = identity;
-    self.credentials = jsonld.getValues(
-      self.identity, 'credential').map(function(credential) {
-        return credential['@graph'];
-      });
-    self.choices = self.credentials.slice();
-  }).catch(function(err) {
-    brAlertService.add('error', err);
-  }).then(function() {
-    self.loading = false;
-  });
+    }).then(function() {
+      // handle operation, proper session created
+      if(operation.name === 'get') {
+        self.query = operation.options.query;
+        // TODO: Consider changing "cred:requestPublicAccess" to
+        // "cred:requestPersistentAccess" with a value of "publicAccess" so we
+        // can support consumers providing their ID as a value as well
+        if(jsonld.hasProperty(self.query, 'cred:requestPublicAccess')) {
+          self.publicAccess.requested = true;
+        }
+        // do not show `get` view for crypto key requests because they are
+        // auto-handled
+        if(!_isCryptoKeyRequest(self.query)) {
+          self.view = 'get';
+        }
+        return _getIdentity(operation.options);
+      } else {
+        self.view = 'store';
+        return $q.resolve(operation.options.store);
+      }
+    }).then(function(identity) {
+      // if op is `get` and query is a public key query, complete using the
+      // identity w/the public key credential (which should, by now, be signed
+      // by the IdP)
+      if(operation.name === 'get' && _isCryptoKeyRequest(self.query)) {
+        return self.complete(identity);
+      }
+      self.identity = identity;
+      self.credentials = jsonld.getValues(
+        self.identity, 'credential').map(function(credential) {
+          return credential['@graph'];
+        });
+      self.choices = self.credentials.slice();
+    }).catch(function(err) {
+      brAlertService.add('error', err);
+    }).then(function() {
+      self.loading = false;
+    });
+  };
 
   self.complete = function(identity) {
     var promise;
@@ -114,13 +115,13 @@ function Ctrl(
     }
     return promise.then(function() {
       return operation.complete(identity, {
-        agentUrl: aio.baseUri + '/agent'
+        agentUrl: aio.agentUrl
       });
     }).catch(function(err) {
       if(operation.name === 'store' && err.type === 'DuplicateCredential') {
         // the credential has already been stored successfully, return success
         return operation.complete(identity, {
-          agentUrl: aio.baseUri + '/agent'
+          agentUrl: aio.agentUrl
         });
       } else {
         console.error('Failed to ' + operation.name + ' credential', err);
