@@ -158,6 +158,10 @@ function Ctrl(
 
   // stores credentials
   function _storeCredentials(identity) {
+    if(!identity) {
+      // storage request denied by user
+      return $q.resolve();
+    }
     identity = angular.extend(
       {}, identity, {
         credential: self.choices.map(function(credential) {
