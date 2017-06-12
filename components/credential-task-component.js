@@ -6,20 +6,18 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-define(['lodash', 'angular', 'jsonld'], function(_, angular, jsonld) {
+import _ from 'lodash';
+import angular from 'angular';
+import jsonld from 'jsonld';
 
-'use strict';
-
-function register(module) {
-  module.component('brCredentialTask', {
-    bindings: {
-      createSession: '&brCreateSession'
-    },
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-credential-curator/components/credential-task-component.html')
-  });
-}
+export default {
+  bindings: {
+    createSession: '&brCreateSession'
+  },
+  controller: Ctrl,
+  templateUrl:
+    'bedrock-credential-curator/components/credential-task-component.html'
+};
 
 /* @ngInject */
 function Ctrl(
@@ -92,8 +90,8 @@ function Ctrl(
       self.identity = identity;
       self.credentials = jsonld.getValues(
         self.identity, 'credential').map(function(credential) {
-          return credential['@graph'];
-        });
+        return credential['@graph'];
+      });
       self.choices = self.credentials.slice();
     }).catch(function(err) {
       brAlertService.add('error', err);
@@ -162,12 +160,11 @@ function Ctrl(
       // storage request denied by user
       return $q.resolve();
     }
-    identity = angular.extend(
-      {}, identity, {
-        credential: self.choices.map(function(credential) {
-          return {'@graph': credential};
-        })
-      });
+    identity = angular.extend({}, identity, {
+      credential: self.choices.map(function(credential) {
+        return { '@graph': credential};
+      })
+    });
     return $http.post('/tasks/credentials/store-credentials', identity)
       .then(function(response) {
         if(response.status !== 200) {
@@ -203,12 +200,9 @@ function Ctrl(
           '?id=' + credential.id;
       }
       updatePromises.push(
-        $q.resolve(brCredentialService.collection.update(update, options)));
+        $q.resolve(brCredentialService.collection.update(update, options))
+      );
     });
     return updatePromises;
   }
 }
-
-return register;
-
-});
