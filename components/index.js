@@ -5,13 +5,9 @@
  *
  * @author Dave Longley
  */
-define([
-  'angular',
-  './credential-manager-component',
-  './credential-task-component'
-], function(angular) {
-
-'use strict';
+import angular from 'angular';
+import CredentialManagerComponent from './credential-manager-component.js';
+import CredentialTaskComponent from './credential-task-component.js';
 
 // TODO: need widgets for:
 // viewing claimed credentials
@@ -26,8 +22,5 @@ var module = angular.module(
     'bedrock.alert', 'bedrock.credential', 'bedrock.identity-composer'
   ]);
 
-Array.prototype.slice.call(arguments, 1).forEach(function(register) {
-  register(module);
-});
-
-});
+module.component('brCredentialManager', CredentialManagerComponent);
+module.component('brCredentialTask', CredentialTaskComponent);

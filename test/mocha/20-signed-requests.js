@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2017 Digital Bazaar, Inc. All rights reserved.
  */
 /* jshint node: true */
 'use strict';
