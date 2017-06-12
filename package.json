@@ -2,7 +2,8 @@
   "name": "bedrock-credential-curator",
   "version": "0.5.1-0",
   "description": "Bedrock Credential Curator",
-  "main": "./lib",
+  "main": "lib",
+  "less": "components/main.less",
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-credential-curator"
@@ -50,6 +51,11 @@
       "bedrock-angular-identity-composer",
       "credentials-polyfill",
       "lodash"
-    ]
+    ],
+    "manifest": {
+      "bedrock-credential-curator": {
+        "main": "components/index.js"
+      }
+    }
   }
 }
