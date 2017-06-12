@@ -3,7 +3,6 @@
   "version": "0.5.1-0",
   "description": "Bedrock Credential Curator",
   "main": "./lib",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-credential-curator"
@@ -21,6 +20,11 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-credential-curator",
   "dependencies": {
+    "bedrock-angular": "^3.0.0",
+    "bedrock-angular-credential": "^3.0.0",
+    "bedrock-angular-identity-composer": "^3.0.0",
+    "credentials-polyfill": "^1.1.5",
+    "lodash": "^4.6.1",
     "async": "^1.5.2",
     "bignumber.js": "^2.1.4",
     "did-io": "^0.6.1",
@@ -37,9 +41,15 @@
     "bedrock-credentials-rest": "^1.0.0",
     "bedrock-passport": "^3.0.0",
     "bedrock-permission": "^2.3.0",
-    "bedrock-views": "^4.0.0"
+    "bedrock-views": "^5.0.0"
   },
-  "directories": {
-    "lib": "./lib"
+  "bedrock": {
+    "browserDependencies": [
+      "bedrock-angular",
+      "bedrock-angular-credential",
+      "bedrock-angular-identity-composer",
+      "credentials-polyfill",
+      "lodash"
+    ]
   }
 }
