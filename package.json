@@ -2,6 +2,7 @@
   "name": "bedrock-credential-curator",
   "version": "0.5.1-0",
   "description": "Bedrock Credential Curator",
+  "browser": "components/index.js",
   "main": "lib",
   "less": "components/main.less",
   "repository": {
