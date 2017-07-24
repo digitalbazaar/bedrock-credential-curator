@@ -52,11 +52,6 @@
       "bedrock-angular-identity-composer",
       "credentials-polyfill",
       "lodash"
-    ],
-    "manifest": {
-      "bedrock-credential-curator": {
-        "main": "components/index.js"
-      }
-    }
+    ]
   }
 }
