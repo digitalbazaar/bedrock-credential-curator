@@ -2,12 +2,13 @@
  * Credential Curator components module.
  *
  * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
- *
- * @author Dave Longley
  */
+'use strict';
+
 import angular from 'angular';
 import CredentialManagerComponent from './credential-manager-component.js';
-import CredentialTaskComponent from './credential-task-component.js';
+import CredentialRequestComponent from './credential-request-component.js';
+import CredentialStoreComponent from './credential-store-component.js';
 
 // TODO: need widgets for:
 // viewing claimed credentials
@@ -17,10 +18,11 @@ import CredentialTaskComponent from './credential-task-component.js';
 // viewing notifications of unclaimed credentials or done as part of another
 // module?
 
-var module = angular.module(
+const module = angular.module(
   'bedrock.credential-curator', [
     'bedrock.alert', 'bedrock.credential', 'bedrock.identity-composer'
   ]);
 
 module.component('brCredentialManager', CredentialManagerComponent);
-module.component('brCredentialTask', CredentialTaskComponent);
+module.component('brCredentialRequest', CredentialRequestComponent);
+module.component('brCredentialStore', CredentialStoreComponent);

@@ -25,12 +25,13 @@
     "bedrock-angular": "^3.0.0",
     "bedrock-angular-credential": "^3.0.0",
     "bedrock-angular-identity-composer": "^3.0.0",
+    "bedrock-credential-handler": "^0.1.0",
     "credentials-polyfill": "^1.1.5",
     "lodash": "^4.6.1",
     "async": "^1.5.2",
     "bignumber.js": "^2.1.4",
     "did-io": "^0.6.1",
-    "jsonld-signatures": "^1.1.3",
+    "jsonld-signatures": "digitalbazaar/jsonld-signatures#multiSignature",
     "lodash": "^4.14.1",
     "request": "^2.69.0",
     "uuid": "^2.0.2"
@@ -50,6 +51,7 @@
       "bedrock-angular",
       "bedrock-angular-credential",
       "bedrock-angular-identity-composer",
+      "bedrock-credential-handler",
       "credentials-polyfill",
       "lodash"
     ]
