@@ -24,10 +24,8 @@ function Ctrl($http, $scope, brSessionService, config) {
   let _reject;
 
   (async () => {
-    console.log('loaded credential store UI');
     const proxy = new CredentialEventProxy();
     const event = await proxy.receive('credentialstore');
-    console.log('UI got credential store event', event);
     event.respondWith(new Promise(async (resolve, reject) => {
       _resolve = resolve;
       _reject = reject;
@@ -38,14 +36,11 @@ function Ctrl($http, $scope, brSessionService, config) {
         // TODO: naming, etc. can likely be improved, copied from old
         //   credential-task-component
         await authenticate({event});
-        console.log('authenticated');
         self.identity = self.credential.data;
         self.credentials = jsonld.getValues(
           self.identity, 'credential').map(function(credential) {
           return credential['@graph'];
         });
-        self.choices = self.credentials.slice();
-        console.log('ready to show storage choices', self.credentials);
       } catch(e) {
         return reject(e);
       }
@@ -88,10 +83,8 @@ function Ctrl($http, $scope, brSessionService, config) {
 
   // TODO: code duplicated in `credential-request-component`, consolidate it
   async function authenticate({event}) {
-    console.log('authenticating...');
     const session = await brSessionService.get();
     if(!session.identity) {
-      console.log('creating session...');
       // session does not exist, create it
       return self.createSession({identity: {id: event.hintKey}});
     }
