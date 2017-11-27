@@ -3,7 +3,7 @@
   "version": "0.5.1-0",
   "description": "Bedrock Credential Curator",
   "browser": "components/index.js",
-  "main": "lib",
+  "main": "./lib/index.js",
   "less": "components/main.less",
   "repository": {
     "type": "git",
