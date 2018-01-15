@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-credential-curator",
   "dependencies": {
-    "bedrock-angular": "^3.0.0",
-    "bedrock-angular-credential": "^3.0.0",
-    "bedrock-angular-identity-composer": "^3.0.0",
+    "bedrock-angular": "^4.0.0",
+    "bedrock-angular-credential": "digitalbazaar/bedrock-angular-credential#material",
+    "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#material",
     "bedrock-credential-handler": "^0.1.0",
-    "credentials-polyfill": "^1.1.5",
+    "credential-handler-polyfill": "^0.1.0",
     "lodash": "^4.6.1",
     "async": "^1.5.2",
     "bignumber.js": "^2.1.4",
@@ -52,7 +52,7 @@
       "bedrock-angular-credential",
       "bedrock-angular-identity-composer",
       "bedrock-credential-handler",
-      "credentials-polyfill",
+      "credential-handler-polyfill",
       "lodash"
     ]
   }
