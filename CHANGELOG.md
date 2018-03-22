@@ -1,5 +1,7 @@
 # bedrock-credential-curator ChangeLog
 
+## 1.0.0 - 2018-03-21
+
 ### Changed
 - **BREAKING**: Switch to material design.
 - **BREAKING**: Rename module to `bedrock.credential-curator`.
