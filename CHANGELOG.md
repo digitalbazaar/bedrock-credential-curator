@@ -1,5 +1,15 @@
 # bedrock-credential-curator ChangeLog
 
+### Changed
+- **BREAKING**: Switch to material design.
+- **BREAKING**: Rename module to `bedrock.credential-curator`.
+- Convert directives to components.
+- Use ES6 syntax.
+- Support newer credential handler API.
+
+### Removed
+- **BREAKING**: Remove bower support.
+
 ## 0.5.0 - 2017-03-02
 
 ### Changed
