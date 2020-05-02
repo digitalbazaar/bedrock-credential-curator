@@ -1,0 +1,24 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-credential > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-identity-composer > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - did-io > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2020-05-02T05:48:49.421Z'
